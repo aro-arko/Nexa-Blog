@@ -1,5 +1,10 @@
 import BlogCard from "@/components/ui/BlogCard";
 import { Blog } from "@/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NexaBlog | Blogs",
+};
 
 const BlogsPage = async () => {
   const res = await fetch("http://localhost:5000/blogs", {
@@ -7,7 +12,7 @@ const BlogsPage = async () => {
   });
   const blogs = await res.json();
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="w-[90%] mx-auto">
       <h1 className="text-3xl text-center my-5 font-bold">
         Explore All Blogs From <span className="text-teal-600">NexaBlog</span>
       </h1>
