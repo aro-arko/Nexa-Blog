@@ -2,10 +2,12 @@ import BlogCard from "@/components/ui/BlogCard";
 import { Blog } from "@/types";
 
 const BlogsPage = async () => {
-  const res = await fetch("http://localhost:5000/blogs", {});
+  const res = await fetch("http://localhost:5000/blogs", {
+    cache: "no-store",
+  });
   const blogs = await res.json();
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <h1 className="text-3xl text-center my-5 font-bold">
         Explore All Blogs From <span className="text-teal-600">NexaBlog</span>
       </h1>
@@ -15,7 +17,7 @@ const BlogsPage = async () => {
           unprecedented computational power.
         </i>
       </p>
-      <div>
+      <div className="grid grid-cols-3 gap-6 my-5">
         {blogs.map((blog: Blog) => (
           <BlogCard key={blog.id} blog={blog} />
         ))}
