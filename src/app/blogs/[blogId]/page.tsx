@@ -1,4 +1,13 @@
 import BlogDetailsCard from "@/components/ui/BlogDetailsCard";
+import { Blog } from "@/types";
+
+export const generateStaticParams = async () => {
+  const res = await fetch("http://localhost:5000/blogs");
+  const blogs = await res.json();
+  return blogs.slice(0, 3).map((blog: Blog) => ({
+    blogId: blog.id,
+  }));
+};
 
 const BlogDetailsPage = async ({
   params,
@@ -6,13 +15,9 @@ const BlogDetailsPage = async ({
   params: Promise<{ blogId: string }>;
 }) => {
   const { blogId } = await params;
-  //   console.log(blogId);
-
-  const res = await fetch(`http://localhost:5000/blogs/${blogId}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(`http://localhost:5000/blogs/${blogId}`);
   const blog = await res.json();
-  console.log(blog);
+  //   console.log(blog);
   return (
     <div className="my-10">
       <BlogDetailsCard blog={blog} />
